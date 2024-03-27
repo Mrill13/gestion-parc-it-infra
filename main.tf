@@ -1,4 +1,5 @@
- required_providers {
+{
+  required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
       version = "~> 3.0.0"
@@ -17,12 +18,12 @@ resource "random_integer" "random_id" {
 }
 
 resource "azurerm_resource_group" "rg" {
-  name     = "rg-Idir-terraform-giardina-${random_integer.random_id.result}"
-  location = "France Central"  # Region France Central
+  name     = "rg-idir-giardina-${random_integer.random_id.result}"
+  location = "France Central"  # Région France Central
 }
 
 resource "azurerm_app_service_plan" "asp" {
-  name                = "asp-Idir-terraform-giardina-${random_integer.random_id.result}"
+  name                = "asp-idir-giardina-${random_integer.random_id.result}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   kind                = "Linux"
@@ -36,7 +37,7 @@ resource "azurerm_app_service_plan" "asp" {
 }
 
 resource "azurerm_app_service" "webapp" {
-  name                = "webapp-Idir-terraform-giardina-${random_integer.random_id.result}"
+  name                = "webapp-idir-giardina-${random_integer.random_id.result}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   app_service_plan_id = azurerm_app_service_plan.asp.id
